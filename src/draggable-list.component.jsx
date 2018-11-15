@@ -10,7 +10,6 @@ const Header = styled.header`
   display: flex;
   height: ${props => props.height}px;
   font-weight: 600;
-  border-top: 1px solid ${props => props.theme.colors.colorGridBorder};
   border-bottom: 1px solid ${props => props.theme.colors.colorGridBorder};
 `;
 
@@ -21,6 +20,7 @@ const List = styled(DraggableListSortableContainer)`
 const Container = styled.div`
   width: 100%;
   height: 100%;
+  border: 1px solid ${props => props.theme.colors.colorGridBorder};
 `;
 
 const HeaderColumn = styled(Column)`
