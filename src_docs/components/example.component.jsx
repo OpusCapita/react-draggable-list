@@ -9,14 +9,15 @@ const columns = [{
   width: 180,
   valueKey: 'name',
 }, {
+  title: 'Active',
+  width: 75,
+  valueKey: 'active',
+  valueRender: row => (row.active ? 'Yes' : 'No'),
+  alignment: 'center',
+}, {
   title: 'Email',
   width: 180,
   valueKey: 'email',
-}, {
-  title: 'Active',
-  width: 240,
-  valueKey: 'active',
-  valueRender: row => (row.active ? 'Yes' : 'No'),
 }];
 
 export default class ComponentView extends React.PureComponent {

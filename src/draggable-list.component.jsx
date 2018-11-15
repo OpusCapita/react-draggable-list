@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 // App imports
 import DraggableListSortableContainer from './draggable-list-sortable-container.component';
+import Column from './draggable-list-column.component';
 
 const Header = styled.header`
   display: flex;
@@ -13,16 +14,12 @@ const Header = styled.header`
   border-bottom: 1px solid ${props => props.theme.colors.colorGridBorder};
 `;
 
-const HeaderColumn = styled.div`
-  min-width: ${props => props.width}px;
-  width: ${props => props.width}px;
-  align-items: center;
-  display: flex;
-  border-right: 1px solid ${props => props.theme.colors.colorGridBorder};
-  padding: 0 ${props => props.theme.halfGutterWidth};
-`;
 const List = styled(DraggableListSortableContainer)`
 
+`;
+
+const HeaderColumn = styled(Column)`
+  border-right: 1px solid ${props => props.theme.colors.colorGridBorder};
 `;
 export default class DraggableList extends React.PureComponent {
   static propTypes = {
@@ -76,8 +73,14 @@ export default class DraggableList extends React.PureComponent {
       <div>
         <Header height={rowHeight}>
           {showIndex && <HeaderColumn width={30}>#</HeaderColumn>}
-          {columns.map(column => (
-            <HeaderColumn key={column.valueKey} width={column.width}>{column.title}</HeaderColumn>
+          {columns && columns.map(column => (
+            <HeaderColumn
+              key={column.valueKey}
+              width={column.width}
+              alignment={column.alignment || 'flex-start'}
+            >
+              <span>{column.title}</span>
+            </HeaderColumn>
           ))}
         </Header>
         <List

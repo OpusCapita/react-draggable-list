@@ -16,9 +16,8 @@ export default SortableContainer((props) => {
 
   return (
     <Container id={`${rowHeight}-scrollbar`}>
-
       <Infinite
-        containerHeight={20 * rowHeight}
+        containerHeight={listHeight - rowHeight}
         elementHeight={rowHeight}
         getContainer={() => document.getElementById(`${rowHeight}-scrollbar`)}
       >

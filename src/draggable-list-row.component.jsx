@@ -2,10 +2,17 @@ import React from 'react';
 import { SortableElement, SortableHandle } from 'react-sortable-hoc';
 import styled from 'styled-components';
 import { Icon } from '@opuscapita/react-icons';
+// app
+import Column from './draggable-list-column.component';
 
+const HandleIcon = styled(Icon)`
+  margin-right: 0;
+  margin-left: auto;
+  display: flex;
+  width: 4rem;
+`;
 
-const DragHandle = SortableHandle(() => <Icon type="indicator" name="draggingArrows" />);
-
+const DragHandle = SortableHandle(() => <HandleIcon type="indicator" name="draggingArrows" />);
 const Row = styled.div`
   display: flex;
   height: ${props => props.height}px;
@@ -17,12 +24,6 @@ const Row = styled.div`
     background: ${props => props.theme.colors.colorGridSelected};
   }
   user-select: none;
-`;
-
-const Column = styled.div`
-  min-width: ${props => props.width}px;
-  width: ${props => props.width}px;
-  padding: 0 ${props => props.theme.halfGutterWidth};
 `;
 
 export default SortableElement((props) => {
@@ -41,8 +42,9 @@ export default SortableElement((props) => {
         <Column
           key={`${props.item[idKey]}-${column.valueKey}`}
           width={column.width}
+          alignment={column.alignment || 'flex-start'}
         >
-          {column.valueKey && !column.valueRender && item[column.valueKey]}
+          {column.valueKey && !column.valueRender && <span>{item[column.valueKey]}</span>}
           {column.valueRender && column.valueRender(item)}
         </Column>
       ))}
