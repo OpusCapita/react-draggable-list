@@ -18,6 +18,11 @@ const List = styled(DraggableListSortableContainer)`
 
 `;
 
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+
 const HeaderColumn = styled(Column)`
   border-right: 1px solid ${props => props.theme.colors.colorGridBorder};
 `;
@@ -70,7 +75,7 @@ export default class DraggableList extends React.PureComponent {
       columns, rowHeight, showIndex, disabled,
     } = this.props;
     return (
-      <div>
+      <Container>
         <Header height={rowHeight}>
           {showIndex && <HeaderColumn width={30}>#</HeaderColumn>}
           {columns && columns.map(column => (
@@ -91,7 +96,7 @@ export default class DraggableList extends React.PureComponent {
           useDragHandle
           disabled={disabled}
         />
-      </div>
+      </Container>
     );
   }
 }
