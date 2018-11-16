@@ -19,7 +19,6 @@ const List = styled(DraggableListSortableContainer)`
 
 const Container = styled.div`
   width: 100%;
-  height: 100%;
   border: 1px solid ${props => props.theme.colors.colorGridBorder};
 `;
 
