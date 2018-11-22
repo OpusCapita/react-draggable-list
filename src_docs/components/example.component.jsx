@@ -1,8 +1,16 @@
 import React from 'react';
-import PerfectScrollbar from '@opuscapita/react-perfect-scrollbar';
+import styled from 'styled-components';
 // app imports
 import DraggableList from '../../src/index';
 import items from './example-items.json';
+
+const ActionContainer = styled.div`
+  padding: 0.5rem;
+  background: #fafafa;
+  margin-bottom : 1rem;
+  border: 1px solid #ddd;
+  height: 30px;
+`;
 
 const columns = [{
   title: 'Name',
@@ -25,22 +33,47 @@ export default class ComponentView extends React.PureComponent {
     super(props);
     this.state = {
       items,
+      action: null,
     };
   }
+
+
+  onSelect = (id) => {
+    this.setState({
+      action: `${this.getName(id)} was selected`,
+    });
+  };
+
+  onDoubleClick = (id) => {
+    this.setState({
+      action: `${this.getName(id)} was double clicked`,
+    });
+  };
 
   onChange = (newItems) => {
     this.setState({ items: newItems });
   };
 
+  getName = id => this.state.items.find(item => item.id === id).name;
+
   render() {
     return (
-      <div style={{ padding: '20px', height: '600px' }}>
-        <DraggableList
-          items={this.state.items}
-          columns={columns}
-          listHeight={560}
-          onChange={this.onChange}
-        />
+      <div style={{
+        padding: '20px',
+        height: '700px',
+      }}
+      >
+        <ActionContainer>{this.state.action}</ActionContainer>
+        <div>
+          <DraggableList
+            items={this.state.items}
+            columns={columns}
+            listHeight={560}
+            onChange={this.onChange}
+            onRowSelect={this.onSelect}
+            onRowDoubleClick={this.onDoubleClick}
+          />
+        </div>
       </div>
     );
   }

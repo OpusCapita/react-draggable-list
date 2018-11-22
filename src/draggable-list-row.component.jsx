@@ -29,14 +29,25 @@ const Row = styled.div`
 export default SortableElement((props) => {
   const {
     rowHeight, hideHandle, className, selected, onRowSelect, columns, idKey, item, i, showIndex,
+    onRowDoubleClick,
   } = props;
 
   const onClick = () => {
     onRowSelect(item[idKey]);
   };
 
+  const onDoubleClick = () => {
+    onRowDoubleClick(item[idKey]);
+  };
+
   return (
-    <Row height={rowHeight} className={className} selected={selected} onClick={onClick}>
+    <Row
+      height={rowHeight}
+      className={className}
+      selected={selected}
+      onDoubleClick={onDoubleClick}
+      onClick={onClick}
+    >
       {showIndex && <Column width={30}>{i + 1}</Column>}
       {!!columns && columns.map(column => (
         <Column

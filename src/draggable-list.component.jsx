@@ -30,6 +30,7 @@ export default class DraggableList extends React.PureComponent {
     items: PropTypes.arrayOf(PropTypes.shape({})),
     onChange: PropTypes.func.isRequired,
     onRowSelect: PropTypes.func,
+    onRowDoubleClick: PropTypes.func,
     idKey: PropTypes.string,
     rowHeight: PropTypes.number,
     listHeight: PropTypes.number,
@@ -40,6 +41,8 @@ export default class DraggableList extends React.PureComponent {
 
   static defaultProps = {
     onRowSelect: () => {
+    },
+    onRowDoubleClick: () => {
     },
     items: [],
     idKey: 'id',
@@ -69,6 +72,11 @@ export default class DraggableList extends React.PureComponent {
     });
   };
 
+  onRowDoubleClick = (id) => {
+    const { onRowDoubleClick } = this.props;
+    onRowDoubleClick(id);
+  };
+
   render() {
     const {
       columns, rowHeight, showIndex, disabled,
@@ -92,6 +100,7 @@ export default class DraggableList extends React.PureComponent {
           selectedItem={this.state.selectedItem}
           onSortEnd={this.onSortEnd}
           onRowSelect={this.onRowSelect}
+          onRowDoubleClick={this.onRowDoubleClick}
           useDragHandle
           disabled={disabled}
         />
