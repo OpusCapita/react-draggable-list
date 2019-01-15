@@ -16,6 +16,7 @@ const columns = [{
   title: 'Name',
   width: 180,
   valueKey: 'name',
+  useTooltip: true,
 }, {
   title: 'Active',
   width: 75,

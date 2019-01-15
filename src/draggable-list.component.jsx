@@ -10,7 +10,8 @@ const Header = styled.header`
   display: flex;
   height: ${props => props.height}px;
   font-weight: 600;
-  border-bottom: 1px solid ${props => props.theme.colors.colorGridBorder};
+  border-bottom: 1px solid #a4afb6;
+  background: #eff2f4;
 `;
 
 const List = styled(DraggableListSortableContainer)`
@@ -19,11 +20,11 @@ const List = styled(DraggableListSortableContainer)`
 
 const Container = styled.div`
   width: 100%;
-  border: 1px solid ${props => props.theme.colors.colorGridBorder};
+  border: 1px solid #a4afb6;
 `;
 
 const HeaderColumn = styled(Column)`
-  border-right: 1px solid ${props => props.theme.colors.colorGridBorder};
+  border-right: 1px solid #a4afb6;
 `;
 export default class DraggableList extends React.PureComponent {
   static propTypes = {

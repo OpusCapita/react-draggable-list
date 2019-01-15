@@ -2,8 +2,15 @@ import React from 'react';
 import { SortableElement, SortableHandle } from 'react-sortable-hoc';
 import styled from 'styled-components';
 import { Icon } from '@opuscapita/react-icons';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 // app
 import Column from './draggable-list-column.component';
+
+const DefaultTextContainer = styled.span`
+  text-overflow: ellipsis;
+  white-space: ${props => (!props.insideTooltip ? 'nowrap' : 'normal')};
+  overflow: hidden;
+`;
 
 const HandleIcon = styled(Icon)`
   margin-right: 0;
@@ -12,7 +19,7 @@ const HandleIcon = styled(Icon)`
   width: 4rem;
 `;
 
-const DragHandle = SortableHandle(() => <HandleIcon type="indicator" name="draggingArrows" />);
+const DragHandle = SortableHandle(() => <HandleIcon type="indicator" name="draggingArrows"/>);
 const Row = styled.div`
   display: flex;
   height: ${props => props.height}px;
@@ -40,6 +47,19 @@ export default SortableElement((props) => {
     onRowDoubleClick(item[idKey]);
   };
 
+  const getContent = (column, insideTooltip = false) => {
+    if (column.valueKey && !column.valueRender) {
+      return (
+        <DefaultTextContainer insideTooltip={insideTooltip}>
+          {item[column.valueKey]}
+        </DefaultTextContainer>
+      );
+    }
+    return <div>{column.valueRender(item)}</div>;
+  };
+
+  const tooltip = (col, id) => <Tooltip id={`tooltip-${id}`}>{getContent(col, true)}</Tooltip>;
+
   return (
     <Row
       height={rowHeight}
@@ -55,11 +75,16 @@ export default SortableElement((props) => {
           width={column.width}
           alignment={column.alignment || 'flex-start'}
         >
-          {column.valueKey && !column.valueRender && <span>{item[column.valueKey]}</span>}
-          {column.valueRender && column.valueRender(item)}
+          {column.useTooltip &&
+          <OverlayTrigger overlay={tooltip(column, props.item[idKey])} placement="bottom">
+            {getContent(column)}
+          </OverlayTrigger>}
+          {!column.useTooltip && getContent(column)}
         </Column>
       ))}
       {!hideHandle && <DragHandle {...props} />}
     </Row>
   );
 });
+;
+
