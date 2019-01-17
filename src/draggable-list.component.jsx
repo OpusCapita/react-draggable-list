@@ -10,21 +10,17 @@ const Header = styled.header`
   display: flex;
   height: ${props => props.height}px;
   font-weight: 600;
-  border-bottom: 1px solid #a4afb6;
-  background: #eff2f4;
-`;
-
-const List = styled(DraggableListSortableContainer)`
-
+  border-bottom: 1px solid ${props => props.theme.colors.grey7};
+  background: ${props => props.theme.colors.grey4}
 `;
 
 const Container = styled.div`
   width: 100%;
-  border: 1px solid #a4afb6;
+  border: 1px solid ${props => props.theme.colors.grey7};
 `;
 
 const HeaderColumn = styled(Column)`
-  border-right: 1px solid #a4afb6;
+  border-right: 1px solid ${props => props.theme.colors.grey7};
 `;
 export default class DraggableList extends React.PureComponent {
   static propTypes = {
@@ -96,7 +92,7 @@ export default class DraggableList extends React.PureComponent {
             </HeaderColumn>
           ))}
         </Header>
-        <List
+        <DraggableListSortableContainer
           {...this.props}
           selectedItem={this.state.selectedItem}
           onSortEnd={this.onSortEnd}

@@ -24,11 +24,11 @@ const Row = styled.div`
   display: flex;
   height: ${props => props.height}px;
   cursor: pointer;
-  border-bottom: 1px solid ${props => props.theme.colors.colorGridBorder};
-  align-items:center;
-  background: ${props => (props.selected ? props.theme.colors.colorGridSelected : '#fff')};
+  border-bottom: 1px solid ${props => props.theme.colors.grey6};
+  align-items: center;
+  background: ${props => (props.selected ? props.theme.colors.grey5 : props.theme.colors.white)};
   &:hover {
-    background: ${props => props.theme.colors.colorGridSelected};
+    background: ${props => props.theme.colors.grey4};
   }
   user-select: none;
 `;
