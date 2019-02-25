@@ -9,7 +9,7 @@ npm install @opuscapita/react-component-template
 ```
 
 ### Demo
-View the [DEMO](https://opuscapita.github.io/react-component-template)
+View the [DEMO](https://opuscapita.github.io/react-draggable-list)
 
 ### Builds
 #### UMD
